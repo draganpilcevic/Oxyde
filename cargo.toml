@@ -1,0 +1,12 @@
+[workspace]
+
+members = [
+    "oxyde_macros",
+    "oxyde_transpiler",
+    "oxyde_cli",
+    "oxyde_test",
+    "oxyde_sdk",
+    "sample_contracts",
+    "oxyde_evm",
+    "oxyde_parser",
+]
