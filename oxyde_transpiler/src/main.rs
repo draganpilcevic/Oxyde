@@ -4,7 +4,10 @@ use std::{
 };
 
 use oxyde_transpiler::{typing::*, utils};
-use syn::{ImplItem, Item, ItemImpl, ItemStruct, Type, AngleBracketedGenericArguments, PathArguments, GenericArgument};
+use syn::{
+    AngleBracketedGenericArguments, GenericArgument, ImplItem, Item, ItemImpl, ItemStruct,
+    PathArguments, Type,
+};
 
 fn main() {
     let filename = "lib";
@@ -50,46 +53,31 @@ fn main() {
                 // can expect all to be storage item or storage map?
                 let val = p.path.segments[0].ident.to_string();
                 match val.as_str() {
-                    "StorageItem" => {
-                        match &p.path.segments[0].arguments {
-                            PathArguments::AngleBracketed(stuff) => {
-                                match &stuff.args[0] {
-                                    GenericArgument::Type(t) => {
-                                        match t {
-                                            Type::Path(p2) => {
-                                                p2.path.segments[0].ident.to_string()
-                                            },
-                                            _ => panic!()
-                                        }
-                                    }
-                                    _ => panic!("nope again")
-                                }
-                            }
-                            _ => panic!("nooooope")
-                        }
+                    "StorageItem" => match &p.path.segments[0].arguments {
+                        PathArguments::AngleBracketed(stuff) => match &stuff.args[0] {
+                            GenericArgument::Type(t) => match t {
+                                Type::Path(p2) => p2.path.segments[0].ident.to_string(),
+                                _ => panic!(),
+                            },
+                            _ => panic!("nope again"),
+                        },
+                        _ => panic!("nooooope"),
                     },
-                    "StorageMap" => {
-                        match &p.path.segments[0].arguments {
-                            PathArguments::AngleBracketed(stuff) => {
-                                match &stuff.args[0] {
-                                    GenericArgument::Type(t) => {
-                                        match t {
-                                            Type::Path(p2) => {
-                                                p2.path.segments[0].ident.to_string()
-                                            },
-                                            _ => panic!()
-                                        }
-                                    }
-                                    _ => panic!("nope again")
-                                }
-                            }
-                            _ => panic!("nooooope")
-                        }                    },
-                    _ => panic!("unknown")
+                    "StorageMap" => match &p.path.segments[0].arguments {
+                        PathArguments::AngleBracketed(stuff) => match &stuff.args[0] {
+                            GenericArgument::Type(t) => match t {
+                                Type::Path(p2) => p2.path.segments[0].ident.to_string(),
+                                _ => panic!(),
+                            },
+                            _ => panic!("nope again"),
+                        },
+                        _ => panic!("nooooope"),
+                    },
+                    _ => panic!("unknown"),
                 }
 
                 //p.path.segments[0].ident.to_string()
-            } 
+            }
             _ => panic!(),
         };
 

@@ -1,3 +1,4 @@
 oxyde_cli.bat
 target/
 temp/
+**/TEST_BLOCKCHAIN_DB/

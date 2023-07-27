@@ -16,8 +16,6 @@ fn main() {
     let args: Cli = Cli::parse();
 
     println!("received arg: {}", args.input_file);
-    println!("things have CHANGED");
-    println!("indeeeed");
     //println!("{:?}", args);
 
     File::create("temp/here.sol").unwrap();
